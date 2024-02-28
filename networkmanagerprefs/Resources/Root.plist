@@ -108,13 +108,25 @@
 		</dict>
 		<dict>
             <key>cell</key> 		            <string>PSLinkCell</string>
-            <key>cellClass</key> 	            <string>CCNMRedditCell</string>
+            <key>cellClass</key> 	            <string>CCNMTelegramCell</string>
+            <key>height</key> 		            <real>60.0</real>
+            <key>hasIcon</key> 		            <true/>
+        </dict>
+		<dict>
+            <key>cell</key> 		            <string>PSLinkCell</string>
+            <key>cellClass</key> 	            <string>CCNMDiscordCell</string>
             <key>height</key> 		            <real>60.0</real>
             <key>hasIcon</key> 		            <true/>
         </dict>
         <dict>
             <key>cell</key> 		            <string>PSLinkCell</string>
             <key>cellClass</key> 	            <string>CCNMTwitterCell</string>
+            <key>height</key> 		            <real>60.0</real>
+            <key>hasIcon</key> 		            <true/>
+        </dict>
+		<dict>
+            <key>cell</key> 		            <string>PSLinkCell</string>
+            <key>cellClass</key> 	            <string>CCNMRedditCell</string>
             <key>height</key> 		            <real>60.0</real>
             <key>hasIcon</key> 		            <true/>
         </dict>

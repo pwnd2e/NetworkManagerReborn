@@ -38,6 +38,106 @@
 }
 @end
 
+@implementation CCNMTelegramCell
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier];
+
+    if(self) {
+        _bundle = [NSBundle bundleWithPath:@"/var/jb/Library/PreferenceBundles/NetworkManagerPrefs.bundle"];
+        [_bundle load];
+
+        // Labels
+        self.textLabel.text = @"Telegram";
+        self.detailTextLabel.text = @"@Nixuge";
+        self.detailTextLabel.textColor = [UIColor colorWithRed:0.60 green:0.60 blue:0.60 alpha:1.0];
+
+        // Right image
+        UIImage *telegramLogo = [UIImage imageNamed:@"telegram" inBundle:_bundle compatibleWithTraitCollection:nil];
+        self.accessoryView = [[UIImageView alloc] initWithImage:telegramLogo];
+
+        [specifier setTarget:self];
+        [specifier setButtonAction:@selector(openTelegram)];
+    }
+
+    return self;
+}
+
+-(void)openTelegram {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tg:"]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tg://resolve?domain=Nixuge"] options:@{} completionHandler:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://t.me/Nixuge"] options:@{} completionHandler:nil];
+    }
+}
+@end
+
+@implementation CCNMDiscordCell
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier];
+
+    if(self) {
+        _bundle = [NSBundle bundleWithPath:@"/var/jb/Library/PreferenceBundles/NetworkManagerPrefs.bundle"];
+        [_bundle load];
+
+        // Labels
+        self.textLabel.text = @"Discord";
+        self.detailTextLabel.text = @"@Nixuge";
+        self.detailTextLabel.textColor = [UIColor colorWithRed:0.60 green:0.60 blue:0.60 alpha:1.0];
+
+        // Right image
+        UIImage *discordLogo = [UIImage imageNamed:@"discord" inBundle:_bundle compatibleWithTraitCollection:nil];
+        self.accessoryView = [[UIImageView alloc] initWithImage:discordLogo];
+
+        [specifier setTarget:self];
+        [specifier setButtonAction:@selector(openDiscord)];
+    }
+
+    return self;
+}
+
+-(void)openDiscord {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"discord:"]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"discord://discord.com/users/784062518901473351"] options:@{} completionHandler:nil];
+    }
+    // not opening in the browser as discord browser on mobile is horrendous
+}
+@end
+
+@implementation CCNMTwitterCell
+
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier];
+
+    if(self) {
+        _bundle = [NSBundle bundleWithPath:@"/var/jb/Library/PreferenceBundles/NetworkManagerPrefs.bundle"];
+        [_bundle load];
+
+        // Labels
+        self.textLabel.text = @"Twitter";
+        self.detailTextLabel.text = @"@JeanFilsYTB";
+        self.detailTextLabel.textColor = [UIColor colorWithRed:0.60 green:0.60 blue:0.60 alpha:1.0];
+
+        // Right image
+        UIImage *twitterLogo = [UIImage imageNamed:@"twitter" inBundle:_bundle compatibleWithTraitCollection:nil];
+        self.accessoryView = [[UIImageView alloc] initWithImage:twitterLogo];
+
+        [specifier setTarget:self];
+        [specifier setButtonAction:@selector(openTwitter)];
+    }
+
+    return self;
+}
+
+-(void)openTwitter {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter:"]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=JeanFilsYTB"] options:@{} completionHandler:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.twitter.com/JeanFilsYTB"] options:@{} completionHandler:nil];
+    }
+}
+
+@end
+
 @implementation CCNMRedditCell
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
     self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier];
@@ -48,7 +148,7 @@
 
         // Labels
         self.textLabel.text = @"Reddit";
-        self.detailTextLabel.text = @"/u/NoisyFlake";
+        self.detailTextLabel.text = @"/u/Nixugay";
         self.detailTextLabel.textColor = [UIColor colorWithRed:0.60 green:0.60 blue:0.60 alpha:1.0];
 
         // Right image
@@ -64,52 +164,13 @@
 
 -(void)openReddit {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"reddit:"]]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"reddit:///u/NoisyFlake"] options:@{} completionHandler:nil];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"reddit:///u/Nixugay"] options:@{} completionHandler:nil];
     } else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"apollo:"]]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"apollo://www.reddit.com/u/NoisyFlake"] options:@{} completionHandler:nil];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"apollo://www.reddit.com/u/Nixugay"] options:@{} completionHandler:nil];
     } else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.reddit.com/u/NoisyFlake"] options:@{} completionHandler:nil];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.reddit.com/u/Nixugay"] options:@{} completionHandler:nil];
     }
 }
-@end
-
-@implementation CCNMTwitterCell
-
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
-    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier];
-
-    if(self) {
-        _bundle = [NSBundle bundleWithPath:@"/var/jb/Library/PreferenceBundles/NetworkManagerPrefs.bundle"];
-        [_bundle load];
-
-        // Labels
-        self.textLabel.text = @"Twitter";
-        self.detailTextLabel.text = @"@NoisyFlake";
-        self.detailTextLabel.textColor = [UIColor colorWithRed:0.60 green:0.60 blue:0.60 alpha:1.0];
-
-        // Right image
-        UIImage *twitterLogo = [UIImage imageNamed:@"twitter" inBundle:_bundle compatibleWithTraitCollection:nil];
-        self.accessoryView = [[UIImageView alloc] initWithImage:twitterLogo];
-
-        [specifier setTarget:self];
-        [specifier setButtonAction:@selector(openTwitter)];
-    }
-
-    return self;
-}
-
--(void)openTwitter {
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot:"]]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tweetbot:///user_profile/NoisyFlake"] options:@{} completionHandler:nil];
-    } else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitterrific:"]]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitterrific:///profile?screen_name=NoisyFlake"] options:@{} completionHandler:nil];
-    } else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter:"]]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=NoisyFlake"] options:@{} completionHandler:nil];
-    } else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.twitter.com/NoisyFlake"] options:@{} completionHandler:nil];
-    }
-}
-
 @end
 
 @implementation NetworkManagerLogo

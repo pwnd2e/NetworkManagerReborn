@@ -208,7 +208,7 @@ static void initDataValues() {
   }
 
 %ctor {
-  initDictValues();
+  initDataValues();
   initPrefs();
   loadPrefs();
 }
