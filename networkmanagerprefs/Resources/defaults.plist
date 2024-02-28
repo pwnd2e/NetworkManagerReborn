@@ -2,17 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>enable2G</key>
+	<key>enable2gGSM</key>
 	<true/>
-	<key>enable3G</key>
+	<key>enable3gGSM</key>
 	<true/>
+	<key>enable2gCDMA</key>
+	<false/>
+	<key>enable3gCDMA</key>
+	<false/>
 	<key>enableLTE</key>
 	<true/>
-	<key>useCDMA</key>
+	<key>enable5gNRStandAlone</key>
+	<false/>
+	<key>enable5gNRNonStandAlone</key>
+	<true/>
+	<key>enable5gNR</key>
 	<false/>
 	<key>customText</key>
 	<string></string>
 	<key>selectedNetwork</key>
-	<string>0</string>
+	<string>disabled</string>
 </dict>
 </plist>
