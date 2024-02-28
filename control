@@ -1,6 +1,6 @@
 Package: me.nixuge.networkmanager
 Name: NetworkManager
-Depends: mobilesubstrate, com.opa334.ccsupport
+Depends: mobilesubstrate, com.opa334.ccsupport, oldabi
 Version: 1.3.0
 Architecture: iphoneos-arm
 Description: Force 2G/3G/LTE connection from the Control Center
