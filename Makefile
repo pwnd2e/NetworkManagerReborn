@@ -1,6 +1,6 @@
 include $(THEOS)/makefiles/common.mk
 
-export TARGET = iphone:clang:11.2:11.0
+export TARGET = iphone:clang:latest:11.0
 export ARCHS = arm64 arm64e
 
 BUNDLE_NAME = NetworkManager
@@ -9,6 +9,9 @@ NetworkManager_FILES = CCNetworkManager.x
 NetworkManager_FRAMEWORKS = CoreTelephony
 NetworkManager_PRIVATE_FRAMEWORKS = ControlCenterUIKit
 NetworkManager_INSTALL_PATH = /Library/ControlCenter/Bundles/
+
+NetworkManager_CFLAGS += "-Wno-unused-function"
+NetworkManager_CFLAGS += "-Wno-unused-variable"
 
 after-install::
 	install.exec "killall -9 SpringBoard"
