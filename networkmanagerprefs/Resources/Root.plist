@@ -18,80 +18,80 @@
 		<dict>
 			<key>cell</key>						<string>PSSwitchCell</string>
 			<key>default</key>					<true/>
-			<key>defaults</key>					<string>com.noisyflake.networkmanager</string>
+			<key>defaults</key>					<string>me.nixuge.networkmanager</string>
 			<key>key</key>						<string>enable2gGSM</string>
 			<key>label</key>					<string>Show 2G GSM</string>
-			<key>PostNotification</key> 		<string>com.noisyflake.networkmanager/prefsupdated</string>
+			<key>PostNotification</key> 		<string>me.nixuge.networkmanager/prefsupdated</string>
 		</dict>
 		<dict>
 			<key>cell</key>						<string>PSSwitchCell</string>
 			<key>default</key>					<true/>
-			<key>defaults</key>					<string>com.noisyflake.networkmanager</string>
+			<key>defaults</key>					<string>me.nixuge.networkmanager</string>
 			<key>key</key>						<string>enable3gGSM</string>
 			<key>label</key>					<string>Show 3G GSM</string>
-			<key>PostNotification</key> 		<string>com.noisyflake.networkmanager/prefsupdated</string>
+			<key>PostNotification</key> 		<string>me.nixuge.networkmanager/prefsupdated</string>
 		</dict>
 
 		<dict>
 			<key>cell</key>						<string>PSSwitchCell</string>
 			<key>default</key>					<true/>
-			<key>defaults</key>					<string>com.noisyflake.networkmanager</string>
+			<key>defaults</key>					<string>me.nixuge.networkmanager</string>
 			<key>key</key>						<string>enable2gCDMA</string>
 			<key>label</key>					<string>Show 2G CDMA</string>
-			<key>PostNotification</key> 		<string>com.noisyflake.networkmanager/prefsupdated</string>
+			<key>PostNotification</key> 		<string>me.nixuge.networkmanager/prefsupdated</string>
 		</dict>
 		<dict>
 			<key>cell</key>						<string>PSSwitchCell</string>
 			<key>default</key>					<true/>
-			<key>defaults</key>					<string>com.noisyflake.networkmanager</string>
+			<key>defaults</key>					<string>me.nixuge.networkmanager</string>
 			<key>key</key>						<string>enable3gCDMA</string>
 			<key>label</key>					<string>Show 3G CDMA</string>
-			<key>PostNotification</key> 		<string>com.noisyflake.networkmanager/prefsupdated</string>
+			<key>PostNotification</key> 		<string>me.nixuge.networkmanager/prefsupdated</string>
 		</dict>
 
 		<dict>
 			<key>cell</key>						<string>PSSwitchCell</string>
 			<key>default</key>					<true/>
-			<key>defaults</key>					<string>com.noisyflake.networkmanager</string>
+			<key>defaults</key>					<string>me.nixuge.networkmanager</string>
 			<key>key</key>						<string>enableLTE</string>
 			<key>label</key>					<string>Show LTE</string>
-			<key>PostNotification</key> 		<string>com.noisyflake.networkmanager/prefsupdated</string>
+			<key>PostNotification</key> 		<string>me.nixuge.networkmanager/prefsupdated</string>
 		</dict>
 
 		<dict>
 			<key>cell</key>						<string>PSSwitchCell</string>
 			<key>default</key>					<true/>
-			<key>defaults</key>					<string>com.noisyflake.networkmanager</string>
+			<key>defaults</key>					<string>me.nixuge.networkmanager</string>
 			<key>key</key>						<string>enable5gNRStandAlone</string>
 			<key>label</key>					<string>Show 5g NR StandAlone</string>
-			<key>PostNotification</key> 		<string>com.noisyflake.networkmanager/prefsupdated</string>
+			<key>PostNotification</key> 		<string>me.nixuge.networkmanager/prefsupdated</string>
 		</dict>
 		<dict>
 			<key>cell</key>						<string>PSSwitchCell</string>
 			<key>default</key>					<true/>
-			<key>defaults</key>					<string>com.noisyflake.networkmanager</string>
+			<key>defaults</key>					<string>me.nixuge.networkmanager</string>
 			<key>key</key>						<string>enable5gNRNonStandAlone</string>
 			<key>label</key>					<string>Show 5g NR Non StandAlone</string>
-			<key>PostNotification</key> 		<string>com.noisyflake.networkmanager/prefsupdated</string>
+			<key>PostNotification</key> 		<string>me.nixuge.networkmanager/prefsupdated</string>
 		</dict>
 		<dict>
 			<key>cell</key>						<string>PSSwitchCell</string>
 			<key>default</key>					<true/>
-			<key>defaults</key>					<string>com.noisyflake.networkmanager</string>
+			<key>defaults</key>					<string>me.nixuge.networkmanager</string>
 			<key>key</key>						<string>enable5gNR</string>
 			<key>label</key>					<string>Show 5g NR</string>
-			<key>PostNotification</key> 		<string>com.noisyflake.networkmanager/prefsupdated</string>
+			<key>PostNotification</key> 		<string>me.nixuge.networkmanager/prefsupdated</string>
 		</dict>
 
 		<dict>
 			<key>cell</key> 					<string>PSEditTextCell</string>
 			<key>default</key> 					<string></string>
-			<key>defaults</key> 				<string>com.noisyflake.networkmanager</string>
+			<key>defaults</key> 				<string>me.nixuge.networkmanager</string>
 			<key>placeholder</key> 				<string>Auto Network</string>
 			<key>noAutoCorrect</key> 			<true/>
 			<key>key</key> 						<string>customText</string>
 			<key>label</key> 					<string></string>
-			<key>PostNotification</key> 		<string>com.noisyflake.networkmanager/prefsupdated</string>
+			<key>PostNotification</key> 		<string>me.nixuge.networkmanager/prefsupdated</string>
 		</dict>
 
 		<dict>
@@ -103,7 +103,7 @@
 		<dict>
 			<key>cell</key> 					<string>PSGroupCell</string>
 			<key>label</key> 					<string>Support</string>
-			<key>footerText</key> 				<string>Developed with ♥ by NoisyFlake</string>
+			<key>footerText</key> 				<string>Developed with ♥ by NoisyFlake &amp; Nixuge</string>
 			<key>footerAlignment</key> 			<string>1</string>
 		</dict>
 		<dict>

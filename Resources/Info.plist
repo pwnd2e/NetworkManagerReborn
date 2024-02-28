@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>NetworkManager</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.noisyflake.networkmanager</string>
+	<string>me.nixuge.networkmanager</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleInfoDictionaryVersion</key>

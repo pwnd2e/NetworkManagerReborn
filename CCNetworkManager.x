@@ -133,7 +133,7 @@ static NSString *getValue(NSString *key) {
 static void writeSelectedNetwork() {
   [prefs setObject:selectedNetwork forKey:@"selectedNetwork"];
   [prefs writeToFile:
-             @"/var/jb/User/Library/Preferences/com.noisyflake.networkmanager.plist"
+             @"/var/jb/User/Library/Preferences/me.nixuge.networkmanager.plist"
           atomically:YES];
 }
 
@@ -142,7 +142,7 @@ static void writeSelectedNetwork() {
 static void loadPrefs() {
   prefs = [[NSMutableDictionary alloc]
       initWithContentsOfFile:@"/var/jb/var/mobile/Library/Preferences/"
-                             @"com.noisyflake.networkmanager.plist"];
+                             @"me.nixuge.networkmanager.plist"];
   selectedNetwork = [[prefs objectForKey:@"selectedNetwork"]?: [defaultPrefs objectForKey:@"selectedNetwork"] stringValue];
 }
 
@@ -150,7 +150,7 @@ static void initPrefs() {
   // Copy the default preferences file when the actual preference file doesn't
   // exist
   NSString *path =
-      @"/var/jb/User/Library/Preferences/com.noisyflake.networkmanager.plist";
+      @"/var/jb/User/Library/Preferences/me.nixuge.networkmanager.plist";
   NSString *pathDefault =
       @"/var/jb/Library/PreferenceBundles/NetworkManagerPrefs.bundle/defaults.plist";
   NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -164,7 +164,7 @@ static void initPrefs() {
   CFNotificationCenterAddObserver(
       CFNotificationCenterGetDarwinNotifyCenter(), NULL,
       (CFNotificationCallback)loadPrefs,
-      CFSTR("com.noisyflake.networkmanager/prefsupdated"), NULL,
+      CFSTR("me.nixuge.networkmanager/prefsupdated"), NULL,
       CFNotificationSuspensionBehaviorCoalesce);
 }
 

@@ -1,9 +1,9 @@
-Package: com.noisyflake.networkmanager
+Package: me.nixuge.networkmanager
 Name: NetworkManager
 Depends: mobilesubstrate, com.opa334.ccsupport
-Version: 1.0.2
+Version: 1.3.0
 Architecture: iphoneos-arm
 Description: Force 2G/3G/LTE connection from the Control Center
-Maintainer: NoisyFlake
-Author: NoisyFlake
+Maintainer: Nixuge
+Author: NoisyFlake, Nixuge
 Section: Control Center (Modules)
