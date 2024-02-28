@@ -1,9 +1,9 @@
 Package: me.nixuge.networkmanager
-Name: NetworkManager
+Name: NetworkManagerReborn
 Depends: mobilesubstrate, com.opa334.ccsupport, oldabi
 Version: 1.3.0
 Architecture: iphoneos-arm
-Description: Force 2G/3G/LTE connection from the Control Center
+Description: Force 2G/3G/4G/5G connection from the Control Center
 Maintainer: Nixuge
 Author: NoisyFlake, Nixuge
 Section: Control Center (Modules)
