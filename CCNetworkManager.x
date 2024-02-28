@@ -1,9 +1,12 @@
 #import "CCNetworkManager.h"
 
 NSMutableDictionary *prefs, *defaultPrefs;
-NSDictionary *ratSelectionValues, *labelSelectionValues;
-NSString *selectedNetworkString;
-int selectedNetwork = 0;
+// For some reason if I declare the 3 values below as simple NSDictionaries/NSArray, they just crash w BAD_ACCESS
+// When I call anything on them. Making them mutable fixes this.
+NSMutableDictionary *ratSelectionValues, *labelSelectionValues;
+NSMutableArray* selectionKeys;
+
+NSString *selectedNetwork;
 
 @implementation CCNetworkManager
 
@@ -17,7 +20,7 @@ int selectedNetwork = 0;
   label.clipsToBounds = YES;
   label.textAlignment = NSTextAlignmentCenter;
 
-  if ([selectedNetworkString isEqual:@"disabled"]) {
+  if ([selectedNetwork isEqual:@"disabled"]) {
     label.font = [label.font fontWithSize:12];
 
     NSString *customText =
@@ -41,22 +44,11 @@ int selectedNetwork = 0;
   } else {
     label.font = [label.font fontWithSize:15];
     label.numberOfLines = 1;
-    labelSelectionValues = @{
-      @"disabled" : @"Auto",
-      @"enable2gGSM" : @"2G (GSM)",
-      @"enable3gGSM" : @"3G (GSM)",
-      @"enable2gCDMA" : @"2G (CDMA)",
-      @"enable3gCDMA" : @"3G (CDMA)",
-      @"enableLTE" : @"LTE",
-      @"enable5gNRStandAlone" : @"5G (SA)",
-      @"enable5gNRNonStandAlone" : @"5G (NSA)",
-      @"enable5gNR" : @"5G"
-    };
-    label.text = [labelSelectionValues objectForKey:selectedNetworkString];
+
+    label.text = [labelSelectionValues objectForKey:selectedNetwork];
   }
 
-  UIGraphicsBeginImageContextWithOptions(label.bounds.size, NO,
-                                         0.0); // high res
+  UIGraphicsBeginImageContextWithOptions(label.bounds.size, NO, 0.0); // high res
   [[label layer] renderInContext:UIGraphicsGetCurrentContext()];
   UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
@@ -69,24 +61,13 @@ int selectedNetwork = 0;
 }
 
 - (BOOL)isSelected {
-  return ![selectedNetworkString isEqual:@"disabled"];
+  return ![selectedNetwork isEqual:@"disabled"];
 }
 
 - (void)setSelected:(BOOL)selected {
-  selectedNetworkString = getNextEnabledNetwork();
+  selectedNetwork = getNextEnabledNetwork();
 
-    ratSelectionValues = @{
-      @"disabled" : (__bridge id)kAutomatic,
-      @"enable2gGSM" : (__bridge id)kGSM,
-      @"enable3gGSM" : (__bridge id)kUMTS,
-      @"enable2gCDMA" : (__bridge id)kCDMA,
-      @"enable3gCDMA" : (__bridge id)kEVDO,
-      @"enableLTE" : (__bridge id)kLTE,
-      @"enable5gNRStandAlone" : (__bridge id)kNRStandAlone,
-      @"enable5gNRNonStandAlone" : (__bridge id)kNRNonStandAlone,
-      @"enable5gNR" : (__bridge id)kNR
-    };
-  CFStringRef kValue = (__bridge CFStringRef)[ratSelectionValues objectForKey:selectedNetworkString];
+  CFStringRef kValue = (__bridge CFStringRef)[ratSelectionValues objectForKey:selectedNetwork];
   CTServerConnectionRef cn = _CTServerConnectionCreate(kCFAllocatorDefault, callback, NULL);
   _CTServerConnectionSetRATSelection(cn, kValue, 0);
 
@@ -96,6 +77,7 @@ int selectedNetwork = 0;
 
 @end
 
+// ----- UTILS ----- //
 static void sendSimpleAlert(NSString *title, NSString *content) {
   UIAlertController *alertController =
       [UIAlertController alertControllerWithTitle:title
@@ -117,23 +99,12 @@ static void sendSimpleAlert(NSString *title, NSString *content) {
 
 static NSString *getNextEnabledNetwork() {
     // TODO: CHECK INPUT VALUE
-    NSArray *keys = @[
-                      @"disabled",
-                      @"enable2gGSM",
-                      @"enable3gGSM",
-                      @"enable2gCDMA",
-                      @"enable3gCDMA",
-                      @"enableLTE",
-                      @"enable5gNRStandAlone",
-                      @"enable5gNRNonStandAlone",
-                      @"enable5gNR"
-                      ];
-    NSUInteger index = [keys indexOfObject:selectedNetworkString];
-    NSUInteger count = [keys count];
+    NSUInteger index = [selectionKeys indexOfObject:selectedNetwork];
+    NSUInteger count = [selectionKeys count];
 
     // Loop through the keys starting from the index+1 of the current network
     for (NSUInteger i = index+1; i < count; i++) {
-        NSString *key = keys[i];
+        NSString *key = selectionKeys[i];
         BOOL isEnabled = getBool(key);
         if (isEnabled) {
             return key;
@@ -143,7 +114,7 @@ static NSString *getNextEnabledNetwork() {
     return @"disabled";
 }
 
-// ----- PREFERENCE HANDLING ----- //
+// ----- PREFERENCES ----- //
 
 static BOOL getBool(NSString *key) {
   id ret = [prefs objectForKey:key];
@@ -160,18 +131,19 @@ static NSString *getValue(NSString *key) {
 }
 
 static void writeSelectedNetwork() {
-  [prefs setObject:selectedNetworkString forKey:@"selectedNetwork"];
+  [prefs setObject:selectedNetwork forKey:@"selectedNetwork"];
   [prefs writeToFile:
              @"/var/jb/User/Library/Preferences/com.noisyflake.networkmanager.plist"
           atomically:YES];
 }
 
+// ----- INIT ----- //
+
 static void loadPrefs() {
   prefs = [[NSMutableDictionary alloc]
       initWithContentsOfFile:@"/var/jb/var/mobile/Library/Preferences/"
                              @"com.noisyflake.networkmanager.plist"];
-  selectedNetworkString = [[prefs objectForKey:@"selectedNetwork"]?: [defaultPrefs objectForKey:@"selectedNetwork"] stringValue];
-  selectedNetwork = 0;
+  selectedNetwork = [[prefs objectForKey:@"selectedNetwork"]?: [defaultPrefs objectForKey:@"selectedNetwork"] stringValue];
 }
 
 static void initPrefs() {
@@ -196,8 +168,21 @@ static void initPrefs() {
       CFNotificationSuspensionBehaviorCoalesce);
 }
 
-static void initDictValues() {
-    ratSelectionValues = @{
+static void initDataValues() {
+    // Unfortunately dicts are not ordered in objc, so i have to make an array w the keys in order here
+    selectionKeys = [@[
+      @"disabled",
+      @"enable2gGSM",
+      @"enable3gGSM",
+      @"enable2gCDMA",
+      @"enable3gCDMA",
+      @"enableLTE",
+      @"enable5gNRStandAlone",
+      @"enable5gNRNonStandAlone",
+      @"enable5gNR"
+    ] mutableCopy];
+
+    ratSelectionValues = [@{
       @"disabled" : (__bridge id)kAutomatic,
       @"enable2gGSM" : (__bridge id)kGSM,
       @"enable3gGSM" : (__bridge id)kUMTS,
@@ -207,8 +192,9 @@ static void initDictValues() {
       @"enable5gNRStandAlone" : (__bridge id)kNRStandAlone,
       @"enable5gNRNonStandAlone" : (__bridge id)kNRNonStandAlone,
       @"enable5gNR" : (__bridge id)kNR
-    };
-    labelSelectionValues = @{
+    } mutableCopy];
+
+    labelSelectionValues = [@{
       @"disabled" : @"Auto",
       @"enable2gGSM" : @"2G (GSM)",
       @"enable3gGSM" : @"3G (GSM)",
@@ -218,7 +204,7 @@ static void initDictValues() {
       @"enable5gNRStandAlone" : @"5G (SA)",
       @"enable5gNRNonStandAlone" : @"5G (NSA)",
       @"enable5gNR" : @"5G"
-    };
+    } mutableCopy];
   }
 
 %ctor {
