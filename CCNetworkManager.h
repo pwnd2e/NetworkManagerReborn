@@ -1,3 +1,6 @@
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 #import <ControlCenterUIKit/CCUIToggleModule.h>
 
 @interface CCNetworkManager : CCUIToggleModule
@@ -7,7 +10,8 @@ static BOOL getBool(NSString *key);
 static NSString* getValue(NSString *key);
 static void writeSelectedNetwork();
 
-static void setSelectedNetwork();
+static NSString *getNextEnabledNetwork();
+static void sendSimpleAlert(NSString *title, NSString *content);
 
 typedef void* CTServerConnectionRef;
 
@@ -31,5 +35,14 @@ extern CFStringRef kCTRegistrationRATSelection6;
 
 extern CFStringRef kCTRegistrationRATSelection7;
 #define kAutomatic kCTRegistrationRATSelection7
+
+extern CFStringRef kCTRegistrationRATSelection9;
+#define kNRStandAlone kCTRegistrationRATSelection9
+
+extern CFStringRef kCTRegistrationRATSelection10;
+#define kNRNonStandAlone kCTRegistrationRATSelection10
+
+extern CFStringRef kCTRegistrationRATSelection11;
+#define kNR kCTRegistrationRATSelection11
 
 static void callback() {};
