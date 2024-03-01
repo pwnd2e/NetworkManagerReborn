@@ -2,7 +2,7 @@
 #import <Preferences/PSSpecifier.h>
 
 @interface CCNMRootListController : PSListController
-
+- (void)showHelpAlert:(PSSpecifier *)specifier;
 @end
 
 @interface CCNMTelegramCell : PSTableCell

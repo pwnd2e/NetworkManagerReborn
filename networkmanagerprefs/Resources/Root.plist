@@ -94,10 +94,18 @@
 			<key>PostNotification</key> 		<string>me.nixuge.networkmanager/prefsupdated</string>
 		</dict>
 
+		<!-- Spacing cell to have the "What do I need to enable" button separate -->
 		<dict>
-			<key>cell</key> 					<string>PSGroupCell</string>
-			<key>label</key> 					<string>Note</string>
-			<key>footerText</key> 				<string>Usually 2g/3g GSM are enough. Enable their CDMA counterparts only if your carrier is Sprint or Verizon or if you don't get any signal when forcing 2G/3G</string>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string></string>
+		</dict>
+
+		<dict>
+			<key>cell</key> 					<string>PSButtonCell</string>
+			<key>label</key> 					<string>What do I need to enable?</string>
+			<key>action</key> 					<string>showHelpAlert:</string>
 		</dict>
 
 		<dict>
