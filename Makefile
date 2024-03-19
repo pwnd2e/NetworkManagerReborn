@@ -1,7 +1,13 @@
+ARCHS = arm64
+
+export TARGET = iphone:latest:14.0
+export THEOS=/theos
+INSTALL_TARGET_PROCESSES = SpringBoard
+
+
 include $(THEOS)/makefiles/common.mk
 
-export TARGET = iphone:clang:latest:11.0
-export ARCHS = arm64 arm64e
+
 
 BUNDLE_NAME = NetworkManager
 NetworkManager_BUNDLE_EXTENSION = bundle

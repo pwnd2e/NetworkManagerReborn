@@ -133,7 +133,7 @@ static NSString *getValue(NSString *key) {
 static void writeSelectedNetwork() {
   [prefs setObject:selectedNetwork forKey:@"selectedNetwork"];
   [prefs writeToFile:
-             @"/var/jb/User/Library/Preferences/me.nixuge.networkmanager.plist"
+             @"/User/Library/Preferences/me.nixuge.networkmanager.plist"
           atomically:YES];
 }
 
@@ -141,7 +141,7 @@ static void writeSelectedNetwork() {
 
 static void loadPrefs() {
   prefs = [[NSMutableDictionary alloc]
-      initWithContentsOfFile:@"/var/jb/var/mobile/Library/Preferences/"
+      initWithContentsOfFile:@"/var/mobile/Library/Preferences/"
                              @"me.nixuge.networkmanager.plist"];
   selectedNetwork = [[prefs objectForKey:@"selectedNetwork"]?: [defaultPrefs objectForKey:@"selectedNetwork"] stringValue];
 }
@@ -150,9 +150,9 @@ static void initPrefs() {
   // Copy the default preferences file when the actual preference file doesn't
   // exist
   NSString *path =
-      @"/var/jb/User/Library/Preferences/me.nixuge.networkmanager.plist";
+      @"/User/Library/Preferences/me.nixuge.networkmanager.plist";
   NSString *pathDefault =
-      @"/var/jb/Library/PreferenceBundles/NetworkManagerPrefs.bundle/defaults.plist";
+      @"/Library/PreferenceBundles/NetworkManagerPrefs.bundle/defaults.plist";
   NSFileManager *fileManager = [NSFileManager defaultManager];
   if (![fileManager fileExistsAtPath:path]) {
     [fileManager copyItemAtPath:pathDefault toPath:path error:nil];
