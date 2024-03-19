@@ -1,0 +1,43 @@
+name: Build NetworkManagerReborn
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - rootless: 0
+            name: 'rootful'
+          - rootless: 1
+            name: 'rootless'
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.rootless }}
+      cancel-in-progress: true
+
+    name: Build (${{ matrix.name }})
+    runs-on: macos-12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Install dependencies
+        run: brew install ldid make
+      - name: Set up Theos
+        uses: actions/checkout@v3
+        with:
+          repository: theos/theos
+          path: theos
+          submodules: recursive
+      - name: Compile
+        env:
+          THEOS: theos
+        run: |
+          if [[ ${{ matrix.rootless }} == 0 ]]; then
+            sudo xcode-select -switch /Applications/Xcode_13.4.1.app
+          fi
+          gmake package ROOTLESS=${{ matrix.rootless }}
