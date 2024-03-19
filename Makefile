@@ -5,13 +5,13 @@ export THEOS=/theos
 INSTALL_TARGET_PROCESSES = SpringBoard
 
 
-include $(THEOS)/makefiles/common.mx
+include $(THEOS)/makefiles/common.mk
 
 
 
 BUNDLE_NAME = NetworkManager
 NetworkManager_BUNDLE_EXTENSION = bundle
-NetworkManager_FILES = CCNetworkManager.x
+NetworkManager_FILES = CCNetworkManager.k
 NetworkManager_FRAMEWORKS = CoreTelephony
 NetworkManager_PRIVATE_FRAMEWORKS = ControlCenterUIKit
 NetworkManager_INSTALL_PATH = /Library/ControlCenter/Bundles/
