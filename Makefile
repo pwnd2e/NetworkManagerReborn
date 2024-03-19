@@ -5,7 +5,7 @@ export THEOS=/theos
 INSTALL_TARGET_PROCESSES = SpringBoard
 
 
-include $(THEOS)/makefiles/common.mk
+include $(THEOS)/makefiles/common.mx
 
 
 
